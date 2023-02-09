@@ -3,6 +3,7 @@ extends Control
 export(PackedScene) var target_scene
 
 func _ready():
+	print("Hello world")
 	$VBoxContainer/StartButton.grab_focus()
 
 func _on_StartButton_pressed():
