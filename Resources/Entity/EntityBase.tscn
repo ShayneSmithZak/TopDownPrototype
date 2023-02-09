@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Entity/EntityBase.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Overlap/HurtBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/Effects/HitEffect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/Misc/ScreenShake.tscn" type="PackedScene" id=4]
+
+[node name="EntityBase" type="KinematicBody2D"]
+script = ExtResource( 1 )
+EFFECT_HIT = ExtResource( 3 )
+EFFECT_DIED = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="HurtBox" parent="." instance=ExtResource( 2 )]
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 4 )]
+
+[connection signal="died" from="." to="." method="_on_EntityBase_died"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]
